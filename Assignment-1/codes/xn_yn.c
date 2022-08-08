@@ -37,4 +37,5 @@ int main()
         fprintf(fptr_1, "%f\n", y[k]);
     }
     fclose(fptr);
+    fclose(fptr_1);
 }
