@@ -1,6 +1,8 @@
 #include <stdio.h>
 int main()
 {
+    FILE *fptr = fopen("xn.txt", "w");
+    FILE *fptr_1 = fopen("yn.txt", "w");
     float x[6] = {1, 2, 3, 4, 2, 1};
     int k = 20;
     float y[20];
@@ -26,4 +28,13 @@ int main()
     {
         printf("%f\n", y[i]);
     }
+    for (int j = 0; j < 6; j++)
+    {
+        fprintf(fptr,"%f\n", x[j]);
+    }
+    for(int k = 0; k < 20; k++)
+    {
+        fprintf(fptr_1, "%f\n", y[k]);
+    }
+    fclose(fptr);
 }
