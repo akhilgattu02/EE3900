@@ -501,6 +501,7 @@ find
 		\eqref{eq:freq_resp}.
 \\
 \solution
+
 \begin{align}
 	H(z) = \frac{1+z^{-2}}{1+\frac{z^{-1}}{2}}
 \end{align}
@@ -559,8 +560,20 @@ wget https://raw.githubusercontent.com/gadepall/EE1310/master/filter/codes/hn.py
 \caption{$h(n)$ as the inverse of $H(z)$}
 \label{fig:hn}
 \end{figure}
+h(n) is bounded as it converges to 0
 %
 \item Convergent? Justify using the ratio test.
+\\
+\solution
+\begin{align}
+	h(n) = (\frac{-1}{2})^{n}u(n) + (\frac{-1}{2})^{n-2}u(n-2)
+\end{align}
+As n $\to$ $\infty$,
+\begin{align}
+	h(n)/h(n-1) = \frac{(\frac{-1}{2})^{n} + (\frac{-1}{2})^{n-2}}{(\frac{-1}{2})^{n-1} + (\frac{-1}{2})^{n-3}}
+	= -\frac{1}{2}
+\end{align}
+As $\abs{\frac{h(n)}{h(n-1)}}$$<$1, the series is convergent due to which it is bounded.
 \item The system with $h(n)$ is defined to be stable if
 \begin{equation}
 \sum_{n=-\infty}^{\infty}h(n) < \infty
