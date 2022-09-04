@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1661880653 "/home/akhil/Desktop/EE3900-1/Assignment-1/main.tex" "main.pdf" "main" 1661880653
+["pdflatex"] 1662321488 "/home/akhil/Desktop/EE3900-1/Assignment-1/main.tex" "main.pdf" "main" 1662321488
   "/etc/texmf/web2c/texmf.cnf" 1660112817 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/akhil/Desktop/EE3900-1/Assignment-1/main.tex" 1661880652 21381 40527321b0d07fa0cccdddb58abf99f4 ""
+  "/home/akhil/Desktop/EE3900-1/Assignment-1/main.tex" 1662321487 22077 6873c330bb193c26a793fb10b0e0a0e4 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -143,15 +143,15 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1660117099 2800617 0fb16e1163683f93202ad15ed03c35dc ""
   "codes/Cancel_noise.ipynb" 1659779836 1709 b3efb90c692092a6c91e7882b5689492 ""
   "figs/dtft.pdf" 1660192843 15450 94db247a30fa4285a7c65e01601c6e02 ""
-  "figs/hn.pdf" 1660192843 14182 31a95e05796a7325c4560e2704a25685 ""
+  "figs/hn.pdf" 1661921547 14346 1c0f9d05cd5521d2fc9e93da54ff1e29 ""
   "figs/hndef.pdf" 1660192843 14242 d3e7fb01c593ca2af446f7c68f397148 ""
   "figs/xnyn.pdf" 1660192843 14880 27a73ad4bc037beb7947b8d800c1178f ""
   "figs/ynconv.pdf" 1660192843 14114 626c92cb9c1538e5175d323cbd504933 ""
   "figs/yndft.pdf" 1660192843 13736 fd6661324716aaebfee5f2bbcff08d0e ""
-  "main.aux" 1661880653 4254 988d610081d04748957d929242ea1b83 "pdflatex"
-  "main.out" 1661880653 824 ede0bd39395c52b880a8a7eb6eb76c7d "pdflatex"
-  "main.tex" 1661880652 21381 40527321b0d07fa0cccdddb58abf99f4 ""
-  "main.toc" 1661880653 495 4d0bd33a39c2b28414d36d4ed1a596fc "pdflatex"
+  "main.aux" 1662321488 4254 ce482ae95dd2edf06484900b2c0fd0f5 "pdflatex"
+  "main.out" 1662321488 824 ede0bd39395c52b880a8a7eb6eb76c7d "pdflatex"
+  "main.tex" 1662321487 22077 6873c330bb193c26a793fb10b0e0a0e4 ""
+  "main.toc" 1662321488 495 4d0bd33a39c2b28414d36d4ed1a596fc "pdflatex"
   (generated)
   "main.aux"
   "main.log"

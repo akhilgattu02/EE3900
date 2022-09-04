@@ -541,12 +541,14 @@ h(n) \ztrans H(z)
 and there is a one to one relationship between $h(n)$ and $H(z)$. $h(n)$ is known as the {\em impulse response} of the
 system defined by \eqref{eq:iir_filter}.
 \\
+
 \solution From \eqref{eq:freq_resp},
 \begin{align}
 H(z) &= \frac{1}{1 + \frac{1}{2}z^{-1}} + \frac{ z^{-2}}{1 + \frac{1}{2}z^{-1}}
 \\
 \implies h(n) &= \brak{-\frac{1}{2}}^{n}u(n) + \brak{-\frac{1}{2}}^{n-2}u(n-2)
 \end{align}
+For $\abs{\frac{1}{2z}}<1$ or $\abs{z}>\frac{1}{2}$
 using \eqref{eq:anun} and \eqref{eq:z_trans_shift}.
 \item Sketch $h(n)$. Is it bounded? Justify theoretically.
 \\
@@ -560,7 +562,7 @@ wget https://raw.githubusercontent.com/gadepall/EE1310/master/filter/codes/hn.py
 \caption{$h(n)$ as the inverse of $H(z)$}
 \label{fig:hn}
 \end{figure}
-h(n) is bounded as it converges to 0
+h(n) is bounded as it tends to 0 as n tends to 12
 %
 \item Convergent? Justify using the ratio test.
 \\
@@ -580,6 +582,14 @@ As $\abs{\frac{h(n)}{h(n-1)}}$$<$1, the series is convergent due to which it is 
 \end{equation}
 Is the system defined by \eqref{eq:iir_filter} stable for the impulse response in \eqref{eq:impulse_resp}?
 %
+\\
+\solution
+\begin{equation}
+	\sum_{n=0}^{n=11}h(n) = 
+	1 - 0.5 + 1.25 - 0.625 + 0.3125 - 0.15625 + 0.078125 - 0.0390625 + 0.01953125 - 0.00976562 + 0.00390625 - 0.00195312
+	\\
+	1.33
+\end{equation}
 \item Verify the above result using a python code.
 \item 
 Compute and sketch $h(n)$ using 
@@ -633,9 +643,31 @@ wget https://raw.githubusercontent.com/gadepall/EE1310/master/filter/codes/yncon
 \begin{equation}
 y(n) =  \sum_{n=-\infty}^{\infty}x(n-k)h(k)
 \end{equation}
+\solution
+We know that,
+\begin{align}
+	y(n) = \sum_{n=-\infty}^{\infty}x(k)h(n-k)
+\end{align}
+Taking k = n-k
+\begin{align}
+	y(n) =  \sum_{n=-\infty}^{\infty}x(n-k)h(k)
+\end{align}
+\item Oppenheimer question 3.10(e):
+\begin{align}
+	x[n] = u[n+10]-u[n+5]
+	\\
+	=
+	\begin{cases}
+		1 & -10<=n<-6
+		\\	
+		0 & otherwise
+	\end{cases}
+\end{align}
+x[n] is finite length and has only positive powers of z, hence, its ROC is $\abs{z}<\infty$
 \end{enumerate}
 
 %
+
 \section{DFT and FFT}
 \begin{enumerate}[label=\thesection.\arabic*]
 \item
