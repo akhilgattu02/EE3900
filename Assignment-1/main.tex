@@ -38,6 +38,7 @@
 %\usepackage{iithtlc}
 %\usepackage[framemethod=tikz]{mdframed}
 \usepackage{listings}
+\let\vec\mathbf
 
 
 %\usepackage{stmaryrd}
@@ -86,10 +87,10 @@ columns=fullflexible
 \newcommand{\BEQA}{\begin{eqnarray}}
 \newcommand{\EEQA}{\end{eqnarray}}
 \newcommand{\define}{\stackrel{\triangle}{=}}
-
+\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
+\newcommand{\mydet}[1]{\ensuremath{\begin{vmatrix}#1\end{vmatrix}}}
 \bibliographystyle{IEEEtran}
 %\bibliographystyle{ieeetr}
-
 \providecommand{\nCr}[2]{\,^{#1}C_{#2}} % nCr
 \providecommand{\nPr}[2]{\,^{#1}P_{#2}} % nPr
 \providecommand{\mbf}{\mathbf}
@@ -114,7 +115,6 @@ columns=fullflexible
 \providecommand{\mean}[1]{E\left[ #1 \right]}
 \providecommand{\fourier}{\overset{\mathcal{F}}{ \rightleftharpoons}}
 \providecommand{\ztrans}{\overset{\mathcal{Z}}{ \rightleftharpoons}}
-
 %\providecommand{\hilbert}{\overset{\mathcal{H}}{ \rightleftharpoons}}
 \providecommand{\system}{\overset{\mathcal{H}}{ \longleftrightarrow}}
 	%\newcommand{\solution}[2]{\textbf{Solution:}{#1}}
@@ -127,22 +127,16 @@ columns=fullflexible
 \makeatletter
 \@addtoreset{figure}{problem}
 \makeatother
-
 \let\StandardTheFigure\thefigure
 %\renewcommand{\thefigure}{\theproblem.\arabic{figure}}
 \renewcommand{\thefigure}{\theproblem}
-
-
 %\numberwithin{figure}{subsection}
-
 \def\putbox#1#2#3{\makebox[0in][l]{\makebox[#1][l]{}\raisebox{\baselineskip}[0in][0in]{\raisebox{#2}[0in][0in]{#3}}}}
      \def\rightbox#1{\makebox[0in][r]{#1}}
      \def\centbox#1{\makebox[0in]{#1}}
      \def\topbox#1{\raisebox{-\baselineskip}[0in][0in]{#1}}
      \def\midbox#1{\raisebox{-0.5\baselineskip}[0in][0in]{#1}}
-
 \vspace{3cm}
-
 \title{ 
 %\logo{
 Digital Signal Processing
@@ -152,8 +146,6 @@ Digital Signal Processing
 %\title{
 %	\logo{Matrix Analysis through Octave}{\begin{center}\includegraphics[scale=.24]{tlc}\end{center}}{}{HAMDSP}
 %}
-
-
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
 %\title{Matrix Analysis through Octave}
@@ -167,8 +159,7 @@ Digital Signal Processing
 % a separate \thanks must be used for each paragraph as LaTeX2e's \thanks
 % was not built to handle multiple paragraphs
 %
-
-\author{ G V V Sharma$^{*}$ %<-this  stops a space
+\author{ Akhil Gattu$^{*}$ %<-this  stops a space
 \thanks{*The author is with the Department
 of Electrical Engineering, Indian Institute of Technology, Hyderabad
 502285 India e-mail:  gadepall@iith.ac.in.  All content in the manuscript is 
@@ -193,9 +184,6 @@ released under GNU GPL.  Free to use for anything. }% <-this % stops a space
 % you are supposed to have spaces between the names. For what it is worth,
 % this is a minor point as most people would not even notice if the said evil
 % space somehow managed to creep in.
-
-
-
 % The paper headers
 %\markboth{Journal of \LaTeX\ Class Files,~Vol.~6, No.~1, January~2007}%
 %{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Journals}
@@ -206,36 +194,21 @@ released under GNU GPL.  Free to use for anything. }% <-this % stops a space
 % *** name in the headers of peer review papers.                   ***
 % You can use \ifCLASSOPTIONpeerreview for conditional compilation here if
 % you desire.
-
-
-
-
 % If you want to put a publisher's ID mark on the page you can do it like
 % this:
 %\IEEEpubid{0000--0000/00\$00.00~\copyright~2007 IEEE}
 % Remember, if you use this you must call \IEEEpubidadjcol in the second
 % column for its text to clear the IEEEpubid mark.
-
-
-
 % make the title area
 \maketitle
-
 %\newpage
-
 \tableofcontents
-
 %\renewcommand{\thefigure}{\thesection.\theenumi}
 %\renewcommand{\thetable}{\thesection.\theenumi}
-
 \renewcommand{\thefigure}{\theenumi}
 \renewcommand{\thetable}{\theenumi}
-
 %\renewcommand{\theequation}{\thesection}
-
-
 \bigskip
-
 \begin{abstract}
 This manual provides a simple introduction to digital signal processing.
 \end{abstract}
@@ -279,7 +252,7 @@ are audible along with background noise.
 Write the python code for removal of out of band noise and execute the code.
 \\
 \solution
-\lstinputlisting{./codes/Cancel_noise.ipynb}
+\lstinputlisting{./codes/Cancel_noise.py}
 %\begin{figure}[h]
 %\centering
 %\includegraphics[width=\columnwidth]{enc_block_diag.png}
@@ -322,7 +295,9 @@ wget https://github.com/gadepall/EE1310/raw/master/filter/codes/xnyn.py
 \label{fig:xnyn}	
 \end{figure}
 \item Repeat the above exercise using a C code.
-
+\begin{solution}
+	\lstinputlisting{./codes/xn_yn.c}
+\end{solution}
 \end{enumerate}
 \section{$Z$-transform}
 \begin{enumerate}[label=\thesection.\arabic*]
@@ -531,6 +506,7 @@ Hence, by comparing with the coefficients with the definition of z-transform
 	\\
 	h(4) = \frac{5}{16}
 \end{align}
+For $\abs{\frac{1}{2z}}<1$ or $\abs{z}>\frac{1}{2}$
 \item \label{prob:impulse_resp}
 Find an expression for $h(n)$ using $H(z)$, given that 
 %in Problem \ref{eq:ztransab} and \eqref{eq:anun}, given that
@@ -668,7 +644,7 @@ x[n] is finite length and has only positive powers of z, hence, its ROC is $\abs
 
 %
 
-\section{DFT and FFT}
+\section{DFT }
 \begin{enumerate}[label=\thesection.\arabic*]
 \item
 Compute
@@ -690,7 +666,7 @@ $y(n)$ in  Fig.
 \ref{fig:xnyn}. 
 %
 \begin{lstlisting}
-wget https://raw.githubusercontent.com/gadepall/EE1310/master/filter/codes/yndft.ipynb
+wget https://raw.githubusercontent.com/gadepall/EE1310/master/filter/codes/yndft.py
 \end{lstlisting}
 \begin{figure}[!ht]
 \centering
@@ -698,15 +674,811 @@ wget https://raw.githubusercontent.com/gadepall/EE1310/master/filter/codes/yndft
 \caption{$y(n)$ from the DFT}
 \label{fig:yndft}
 \end{figure}
-
 \item Repeat the previous exercise by computing $X(k), H(k)$ and $y(n)$ through FFT and 
 IFFT.
-\item Wherever possible, express all the above equations as matrix equations.
-\item Verify the above equations by generating the DFT matrix in python.
+%\item Wherever possible, express all the above equations as matrix equations.
+%\item Verify the above equations by generating the DFT matrix in python.
 \end{enumerate}
 %
-\section{Exercises}
+\section{FFT}
+% \subsection{Definitions}
+\begin{enumerate}[label=\arabic*.,ref=\thesection.\theenumi]
+\numberwithin{equation}{section}
+    \item The DFT of $x(n)$ is given by
+    \begin{align}
+        X(k) \triangleq \sum_{n=0}^{N-1} x(n) e^{-j 2 \pi k n / N}, \quad k=0,1, \ldots, N-1
+    \end{align}
+\item Let 
+	\begin{align}
+W_{N} = e^{-j2\pi/N} 
+	\end{align}
+		Then the $N$-point {\em DFT matrix} is defined as 
+	\begin{align}
+		\vec{F}_{N} = \sbrak{W_{N}^{mn}}, \quad 0 \le m,n \le N-1 
+	\end{align}
+	where $W_{N}^{mn}$ are the elements of $\vec{F}_{N}$.
+\item Let 
+	\begin{align}
+		\vec{I}_4 = \myvec{\vec{e}_4^{1} &\vec{e}_4^{2} &\vec{e}_4^{3} &\vec{e}_4^{4} }
+	\end{align}
+		be the $4\times 4$ identity matrix.  Then the 4 point {\em DFT permutation matrix} is defined as 
+	\begin{align}
+		\vec{P}_4 = \myvec{\vec{e}_4^{1} &\vec{e}_4^{3} &\vec{e}_4^{2} &\vec{e}_4^{4} }
+	\end{align}
+\item The 4 point {\em DFT diagonal matrix} is defined as 
+	\begin{align}
+		\vec{D}_4 = diag\myvec{W_{8}^{0} & W_{8}^{1} & W_{8}^{2} & W_{8}^{3}}
+	\end{align}
+\item Show that 
+\begin{equation}
+    W_{N}^{2}=W_{N/2}
+\end{equation}
+\begin{solution}
+	\begin{align}
+		W_{N}^{2} = {e}^{-j*2*2\pi/N}
+		\\
+		= {e}^{-j2\pi/(N/2)}
+		\\
+		= W_{N/2}
+	\end{align}
+\end{solution}
+%    \item Find $\vec{P}_6$.
+%    \item Find $\vec{D}_3$.
+    \item Show that 
+\begin{equation}
+	\vec{F}_{4}=
+\begin{bmatrix}
+	\vec{I}_{2} & \vec{D}_{2} \\
+\vec{I}_{2} & -\vec{D}_{2}
+\end{bmatrix}
+\begin{bmatrix}
+\vec{F}_{2} & 0 \\
+0 & \vec{F}_{2}
+\end{bmatrix}
+\vec{P}_{4}
+\end{equation}
+\begin{solution}
+	\begin{equation}
+	\vec{F}_{4}=
+	\begin{bmatrix}
+		1 & 1 & 1 & 1 \\
+		1 & \vec{W_{N}} & \vec{W_{N}^{2}} & \vec{W_{N}^{3}}\\
+		1 & \vec{W_{N}^{2}} & \vec{W_{N}^{4}} & \vec{W_{N}^{6}}\\
+		1 & \vec{W_{N}^{3}} & \vec{W_{N}^{6}} & \vec{W_{N}^{9}}
+	\end{bmatrix}
+\end{equation}
+On post multiplying $F_{4}$ with $P_{4}$  and using $W_{N}^{4} = 1$ we get,
+\begin{equation}
+	\vec{F}_{4}\vec{P}_{4}=
+	\begin{bmatrix}
+		1 & 1 & 1 & 1 \\
+		1 & \vec{W_{N}^2} & \vec{W_{N}} & \vec{W_{N}^{3}}\\
+		1 & 1 & \vec{W_{N}^{2}} & \vec{W_{N}^{6}}\\
+		1 & \vec{W_{N}^{2}} & \vec{W_{N}^{3}} & \vec{W_{N}^{9}}
+	\end{bmatrix}
+\end{equation}
+Using $W_{N}^{2} = W_{N/2}$, upper left and lower left $2*2$ matrices
+become equal to $F_{2}$. The top right matrix =
+\begin{equation}
+	\begin{bmatrix}
+		1 & 1 \\
+		\vec{W_{N}} & \vec{W_{N}^{3}}
+	\end{bmatrix}
+\end{equation}
+=
+\begin{equation}
+	\begin{bmatrix}
+		1 & 0 \\
+		0 & \vec{W_{N}}
+	\end{bmatrix}
+	\begin{bmatrix}
+		1 & 1 \\
+		1 & \vec{W_{N}^{2}}
+	\end{bmatrix}
+\end{equation}
+= ${D_{2}}{F_{2}}$
+\\
+Similarly, bottom right matrix = 
+= -${D_{2}}{F_{2}}$
+\\
+Hence,
+\\${F_{4}{P_{4}}}$ = 
+\begin{equation}
+	\begin{bmatrix}
+		\vec{F_{2}} & \vec{D_{2}F_{2}} \\
+		\vec{F_{2}} & -\vec{D_{2}F_{2}}
+	\end{bmatrix}
+\end{equation}
+\\=
+\begin{equation}
+\begin{bmatrix}
+	\vec{I}_{2} & \vec{D}_{2} \\
+\vec{I}_{2} & -\vec{D}_{2}
+\end{bmatrix}
+\begin{bmatrix}
+\vec{F}_{2} & 0 \\
+0 & \vec{F}_{2}
+\end{bmatrix}
+\end{equation}
+\end{solution}
+\item Show that 
+\begin{equation}
+\vec{F}_{N}=
+\begin{bmatrix}
+\vec{I}_{N/2} & \vec{D}_{N/2} \\
+\vec{I}_{N/2} & -\vec{D}_{N/2}
+\end{bmatrix}
+\begin{bmatrix}
+\vec{F}_{N/2} & 0 \\
+0 & \vec{F}_{N/2}
+\end{bmatrix}
+\vec{P}_{N}
+\end{equation}
+\begin{solution}
+	Similar to the above, we post multiply $F_{N}$ with $P_{N}$
+	so that the resultant matrix can be split into 4 parts:
+	top-left, top-right, bottom-left and bottom-right: all being 
+	${n/2}*{n/2}$ square matrices.
+	\\
+	Top left matrix = Bottom left matrix = $F_{N/2}$
+	\\
+	Top right matrix = $D_{N/2}$$F_{N/2}$
+	\\
+	Bottom right matrix = -$D_{N/2}$$F_{N/2}$
+	Hence,
+\\${F_{N}{P_{N}}}$ = 
+\begin{equation}
+	\begin{bmatrix}
+		\vec{F_{N/2}} & \vec{D_{N/2}F_{N/2}} \\
+		\vec{F_{N/2}} & -\vec{D_{N/2}F_{N/2}}
+	\end{bmatrix}
+\end{equation}
+\end{solution}
+\item Find 
+    \begin{align}
+	     \vec{P}_4 \vec{x}
+    \end{align}
+\begin{solution}
+	\\
+	$\vec{x}$ =
+	\\
+\begin{equation}
+	\begin{bmatrix}
+		1 \\
+		2 \\
+		3 \\
+		4 \\
+		2 \\
+		1 \\
+	\end{bmatrix}
+\end{equation}
+So, $\vec{P_{4}}\vec{x}$ = 
+\begin{equation}
+	\begin{bmatrix}
+		1 \\
+		3 \\
+		2 \\
+		4 \\
+		0 \\
+		0 \\
+	\end{bmatrix}
+\end{equation}
+\end{solution}
+\item Show that 
+    \begin{align}
+	    \vec{X} = \vec{F}_N \vec{x}
+	    \label{eq:dft-mat-def}
+    \end{align}
+		where $\vec{x}, \vec{X}$ are the vector representations of $x(n), X(k)$ respectively.\
+\\		
+\begin{solution}
+\\
+$\vec{x}$ =
+\begin{equation}
+	\begin{bmatrix}
+		x[0] \\
+		x[1] \\
+		x[2] \\
+		. \\
+		. \\
+		. \\
+		x[n-1]
+	\end{bmatrix}
+\end{equation}
+$F_{N}$ =
+\\
+\begin{equation}
+	\begin{bmatrix}
+		1 & 1 & 1 & . & . & . 1 \\
+		1 & W_N & W_N^{2} & . & . &. W_N^{N-1}\\
+		1 & W_N^{2} & W_N^{4} & . & . &. W_N^{2N-2} \\
+		. & . & . & . & . &. W_N^{3N-3}\\
+		. \\
+		. \\
+		1 & W_N^{N-1} & W_N^{2(N-1)} & . & . &. W_N^{N(N-1)}
+	\end{bmatrix}
+\end{equation}
+\\
+$\vec{X}$ =
+\begin{equation}
+	\begin{bmatrix}
+		X[0] \\
+		X[1] \\
+		X[2] \\
+		. \\
+		. \\
+		. \\
+		X[n-1]
+	\end{bmatrix}
+\end{equation}
+By definition, $X[k]$ = $\sum_{n=0}^{N-1}x(n)e^{-2*\pi*j*k*n}$
+\\Hence, by the definition of matrix multiplication:
+\\$\vec{X} = \vec{F_{N}}\vec{x}$ =
+\begin{equation}
+	\begin{bmatrix}
+		1 & 1 & 1 & . & . & . 1 \\
+		1 & W_N & W_N^{2} & . & . &. W_N^{N-1}\\
+		1 & W_N^{2} & W_N^{4} & . & . &. W_N^{2N-2} \\
+		. & . & . & . & . &. W_N^{3N-3}\\
+		. \\
+		. \\
+		1 & W_N^{N-1} & W_N^{2(N-1)} & . & . &. W_N^{N(N-1)}
+	\end{bmatrix}
+	\begin{bmatrix}
+		x[0] \\
+		x[1] \\
+		x[2] \\
+		. \\
+		. \\
+		. \\
+		x[N-1]
+	\end{bmatrix}
+\end{equation}
+\end{solution}
+\item Derive the following Step-by-step visualisation  of
+8-point FFTs into 4-point FFTs and so on
+\begin{equation}
+\begin{bmatrix}
+X(0) \\ 
+X(1) \\ 
+X(2) \\ 
+X(3)
+\end{bmatrix}
+=
+\begin{bmatrix}
+X_{1}(0) \\ 
+X_{1}(1)\\ 
+X_{1}(2)\\
+X_{1}(3)\\
+\end{bmatrix}
++
+\begin{bmatrix}
+W^{0}_{8} & 0 & 0 & 0\\
+0 & W^{1}_{8} & 0 & 0\\
+0 & 0 & W^{2}_{8} & 0\\
+0 & 0 & 0 & W^{3}_{8}
+\end{bmatrix}
+\begin{bmatrix}
+X_{2}(0) \\ 
+X_{2}(1) \\ 
+X_{2}(2) \\
+X_{2}(3)
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\begin{bmatrix}
+X(4) \\ 
+X(5) \\ 
+X(6) \\ 
+X(7)
+\end{bmatrix}
+=
+\begin{bmatrix}
+X_{1}(0) \\ 
+X_{1}(1)\\ 
+X_{1}(2)\\
+X_{1}(3)\\
+\end{bmatrix}
+-
+\begin{bmatrix}
+W^{0}_{8} & 0 & 0 & 0\\
+0 & W^{1}_{8} & 0 & 0\\
+0 & 0 & W^{2}_{8} & 0\\
+0 & 0 & 0 & W^{3}_{8}
+\end{bmatrix}
+\begin{bmatrix}
+X_{2}(0) \\ 
+X_{2}(1) \\ 
+X_{2}(2) \\
+X_{2}(3)
+\end{bmatrix}
+\end{equation}
+4-point FFTs into 2-point FFTs
+\begin{equation}
+\begin{bmatrix}
+X_{1}(0) \\ 
+X_{1}(1)\\ 
+\end{bmatrix}
+=
+\begin{bmatrix}
+X_{3}(0) \\ 
+X_{3}(1)\\ 
+\end{bmatrix}
++
+\begin{bmatrix}
+W^{0}_{4} & 0\\
+0 & W^{1}_{4}
+\end{bmatrix}
+\begin{bmatrix}
+X_{4}(0) \\ 
+X_{4}(1) \\ 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\begin{bmatrix}
+X_{1}(2) \\ 
+X_{1}(3)\\ 
+\end{bmatrix}
+=
+\begin{bmatrix}
+X_{3}(0) \\ 
+X_{3}(1)\\ 
+\end{bmatrix}
+-
+\begin{bmatrix}
+W^{0}_{4} & 0\\
+0 & W^{1}_{4}
+\end{bmatrix}
+\begin{bmatrix}
+X_{4}(0) \\ 
+X_{4}(1) \\ 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\begin{bmatrix}
+X_{2}(0) \\ 
+X_{2}(1)\\ 
+\end{bmatrix}
+=
+\begin{bmatrix}
+X_{5}(0) \\ 
+X_{5}(1)\\ 
+\end{bmatrix}
++
+\begin{bmatrix}
+W^{0}_{4} & 0\\
+0 & W^{1}_{4}
+\end{bmatrix}
+\begin{bmatrix}
+X_{6}(0) \\ 
+X_{6}(1) \\ 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\begin{bmatrix}
+X_{2}(2) \\ 
+X_{2}(3)\\ 
+\end{bmatrix}
+=
+\begin{bmatrix}
+X_{5}(0) \\ 
+X_{5}(1)\\ 
+\end{bmatrix}
+-
+\begin{bmatrix}
+W^{0}_{4} & 0\\
+0 & W^{1}_{4}
+\end{bmatrix}
+\begin{bmatrix}
+X_{6}(0) \\ 
+X_{6}(1) \\ 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+P_{8}
+\begin{bmatrix}
+x(0) \\ 
+x(1) \\ 
+x(2) \\ 
+x(3) \\ 
+x(4) \\ 
+x(5) \\
+x(6) \\
+x(7)
+\end{bmatrix}
+ = 
+\begin{bmatrix}
+x(0) \\ 
+x(2) \\ 
+x(4) \\ 
+x(6) \\
+x(1) \\ 
+x(3) \\ 
+x(5) \\
+x(7)
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+P_{4}
+\begin{bmatrix}
+x(0) \\ 
+x(2) \\ 
+x(4) \\ 
+x(6) \\
+\end{bmatrix}
+ = 
+\begin{bmatrix}
+x(0) \\ 
+x(4) \\ 
+x(2) \\
+x(6)
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+P_{4}
+\begin{bmatrix}
+x(1) \\ 
+x(3) \\ 
+x(5) \\
+x(7)
+\end{bmatrix}
+ = 
+\begin{bmatrix}
+x(1) \\ 
+x(5) \\ 
+x(3) \\ 
+x(7) \\
+\end{bmatrix}
+\end{equation}
+Therefore,
+\begin{equation}
+\begin{bmatrix}
+X_{3}(0) \\ 
+X_{3}(1)\\ 
+\end{bmatrix}
+= F_{2}
+\begin{bmatrix}
+x(0) \\ 
+x(4) \\ 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\begin{bmatrix}
+X_{4}(0) \\ 
+X_{4}(1)\\ 
+\end{bmatrix}
+= F_{2}
+\begin{bmatrix}
+x(2) \\ 
+x(6) \\ 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\begin{bmatrix}
+X_{5}(0) \\ 
+X_{5}(1)\\ 
+\end{bmatrix}
+= F_{2}
+\begin{bmatrix}
+x(1) \\ 
+x(5) \\ 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\begin{bmatrix}
+X_{6}(0) \\ 
+X_{6}(1)\\ 
+\end{bmatrix}
+= F_{2}
+\begin{bmatrix}
+x(3) \\ 
+x(7) \\ 
+\end{bmatrix}
+\end{equation}
+\begin{solution}
+\\
+For every k, X[k] = 
+\begin{equation}
+	\\
+	\sum_{0}^{7}x(n)e^{-2jkn\pi/8}
+	\\
+	= \sum_{0}^{3}x(2n)e^{-2jk(2n)\pi/8}+\sum_{0}^{3}x(2n+1)e^{-2jk(2n+1)\pi/8}
+\end{equation}
+\\=
+\begin{equation}
+	\\
+	= \sum_{0}^{3}x(2n)e^{-2jk(n)\pi/4}+e^{-2kj\pi/8}(\sum_{0}^{3}x(2n+1)e^{-2jk(n)\pi/4})
+\end{equation}
+\\=
+$X_1$[k]+$e^{-2kj\pi/8}$$X_2[k]$, where $X_1$[k] is FFT of even terms
+and $X_2$[k] is FFT of odd terms.
+\\
+Also, if k$>=$4,
+\\
+$e^{-2jk\pi/8}$ = -$e^{-2j(k-4)\pi/8}$ 
+\\Hence,
+\begin{equation}
+\begin{bmatrix}
+	X(0) \\ 
+	X(1) \\
+	X(2) \\
+	X(3) \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+	X_1(0) \\ 
+	X_1(1) \\
+	X_1(2) \\
+	X_1(3) \\
+\end{bmatrix}
++
+\begin{bmatrix}
+	W_8^{0} & 0 & 0 & 0\\ 
+	0 & W_8^{1} & 0 & 0 \\
+	0 & 0 & W_8^{2} & 0 \\
+	0 & 0 & 0 & W_8^{3} \\
+\end{bmatrix}
+\begin{bmatrix}
+	X_2(0) \\ 
+	X_2(1) \\
+	X_2(2) \\
+	X_2(3) \\
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\begin{bmatrix}
+	X(4) \\ 
+	X(5) \\
+	X(6) \\
+	X(7) \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+	X_1(0) \\ 
+	X_1(1) \\
+	X_1(2) \\
+	X_1(3) \\
+\end{bmatrix}
+-
+\begin{bmatrix}
+	W_8^{0} & 0 & 0 & 0\\ 
+	0 & W_8^{1} & 0 & 0 \\
+	0 & 0 & W_8^{2} & 0 \\
+	0 & 0 & 0 & W_8^{3} \\
+\end{bmatrix}
+\begin{bmatrix}
+	X_2(0) \\ 
+	X_2(1) \\
+	X_2(2) \\
+	X_2(3) \\
+\end{bmatrix}
+\end{equation}
+Decomposing into 2 point dft matrices:
+\begin{equation}
+	\begin{bmatrix}
+	X_{1}(0) \\ 
+	X_{1}(1)\\ 
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	X_{3}(0) \\ 
+	X_{3}(1)\\ 
+	\end{bmatrix}
+	+
+	\begin{bmatrix}
+	W^{0}_{4} & 0\\
+	0 & W^{1}_{4}
+	\end{bmatrix}
+	\begin{bmatrix}
+	X_{4}(0) \\ 
+	X_{4}(1) \\ 
+	\end{bmatrix}
+	\end{equation}
+	\begin{equation}
+	\begin{bmatrix}
+	X_{1}(2) \\ 
+	X_{1}(3)\\ 
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	X_{3}(0) \\ 
+	X_{3}(1)\\ 
+	\end{bmatrix}
+	-
+	\begin{bmatrix}
+	W^{0}_{4} & 0\\
+	0 & W^{1}_{4}
+	\end{bmatrix}
+	\begin{bmatrix}
+	X_{4}(0) \\ 
+	X_{4}(1) \\ 
+	\end{bmatrix}
+	\end{equation}
+	\begin{equation}
+	\begin{bmatrix}
+	X_{2}(0) \\ 
+	X_{2}(1)\\ 
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	X_{5}(0) \\ 
+	X_{5}(1)\\ 
+	\end{bmatrix}
+	+
+	\begin{bmatrix}
+	W^{0}_{4} & 0\\
+	0 & W^{1}_{4}
+	\end{bmatrix}
+	\begin{bmatrix}
+	X_{6}(0) \\ 
+	X_{6}(1) \\ 
+	\end{bmatrix}
+	\end{equation}
+	\begin{equation}
+	\begin{bmatrix}
+	X_{2}(2) \\ 
+	X_{2}(3)\\ 
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	X_{5}(0) \\ 
+	X_{5}(1)\\ 
+	\end{bmatrix}
+	-
+	\begin{bmatrix}
+	W^{0}_{4} & 0\\
+	0 & W^{1}_{4}
+	\end{bmatrix}
+	\begin{bmatrix}
+	X_{6}(0) \\ 
+	X_{6}(1) \\ 
+	\end{bmatrix}
+	\end{equation}
+\end{solution}
+\item For 
+    \begin{align}
+	    \vec{x} = \myvec{1\\2\\3\\4\\2\\1}
+        \label{eq:equation1}
+    \end{align}
+    compte the DFT  
+		using 
+	    \eqref{eq:dft-mat-def}
+\\
+\begin{solution}
+	\\$\vec{F_6}$ = $\begin{bmatrix}W_6^{MN}\end{bmatrix}$
+	\\Where M is the index of row of matrix and N the index of column of matrix
+	\\$\vec{F_6}\vec{x}$
+	\\ =
+	\begin{equation}
+		\begin{bmatrix}
+			13 \\
+			-4-\sqrt{3}j \\
+			1 \\
+			-1 \\
+			1 \\
+			-4 + \sqrt{3}j \\
+		\end{bmatrix}
+	\end{equation}
+\end{solution}
+    \item Repeat the above exercise using the FFT
+	    after zero padding $\vec{x}$.
+%	    \eqref{eq:fft-mat-def}
+\\
+\begin{solution}
+	\\$\vec{x}$ = 
+	\begin{equation}
+		\begin{bmatrix}
+			1 \\
+			2 \\
+			3 \\
+			4 \\
+			2 \\
+			1 \\
+			0 \\
+			0 \\
+		\end{bmatrix}
+	\end{equation}
+	\\
+	Using ,
+	\begin{align}
+	\vec{F}_{8}=
+	\begin{bmatrix}
+	\vec{I}_{4} & \vec{D}_{4} \\
+	\vec{I}_{4} & -\vec{D}_{4}
+	\end{bmatrix}
+	\begin{bmatrix}
+	\vec{F}_{4} & 0 \\
+	0 & \vec{F}_{4}
+	\end{bmatrix}
+	\vec{P}_{8}\\
+	\vec{F}_{4}=
+	\begin{bmatrix}
+	\vec{I}_{2} & \vec{D}_{2} \\
+	\vec{I}_{2} & -\vec{D}_{2}
+	\end{bmatrix}
+	\begin{bmatrix}
+	\vec{F}_{2} & 0 \\
+	0 & \vec{F}_{2}
+	\end{bmatrix}
+	\vec{P}_{4}\\
+	\vec{F}_{2}=
+	\begin{bmatrix}
+	\vec{I}_{1} & \vec{D}_{1} \\
+	\vec{I}_{1} & -\vec{D}_{1}
+	\end{bmatrix}
+	\begin{bmatrix}
+	\vec{F}_{1} & 0 \\
+	0 & \vec{F}_{1}
+	\end{bmatrix}
+	\vec{P}_{2}\\
+	\vec{F_1}=\sbrak{1}
+	\end{align}
+	Calculating $\vec{F_2}$,
+\begin{align}
+\vec{F_2}&=\begin{bmatrix}
+\vec{F}_{1} & \vec{D_1F_1} \\
+\vec{F}_{1} & -\vec{D_1F_1}
+\end{bmatrix}\vec{P_2}\\
+&=\begin{bmatrix}1&1\\1&-1\end{bmatrix}
+\end{align}
+Calculating $\vec{F_4}$,
+\begin{align}
+\vec{D}_{2}=diag(1,W_4)
+=\begin{bmatrix}
+1&0\\0&-j
+\end{bmatrix}\\
+\vec{D_2F_2}=\begin{bmatrix}
+1&0\\0&-j
+\end{bmatrix}\begin{bmatrix}
+1&1\\1&-1
+\end{bmatrix}\\
+=\begin{bmatrix}
+1&1\\-j&j
+\end{bmatrix}\\
+\vec{F_4}=\begin{bmatrix}
+\vec{F}_{2} & \vec{D_2F_2} \\
+\vec{F}_{2} & -\vec{D_2F_2}
+\end{bmatrix}\vec{P_4}\\
+\vec{F_4}=\begin{bmatrix}
+1&0&1&1\\0&1&-j&j\\1&0&-1&-1\\0&1&j&-j
+\end{bmatrix}\begin{bmatrix}
+1&0&0&0\\0&0&1&0\\0&1&0&0\\0&0&0&1
+\end{bmatrix}\\
+=\begin{bmatrix}
+1&1&0&1\\0&-j&1&j\\1&-1&0&j\\0&j&1&-j
+\end{bmatrix}
+\end{align}
+Calculating $\vec{F_8}$,
+\begin{align}
+\vec{D_4}=diag\brak{1,W_8,W_8^2,W_8^3}\\
+=\begin{bmatrix}
+1&0&0&0\\0&\frac{1-j}{\sqrt{2}}&0&0\\0&0&-1&0\\0&0&0&\frac{-1-j}{\sqrt{2}}
+\end{bmatrix}\\
+\vec{D_4F_4}=\begin{bmatrix}
+1&0&0&0\\0&\frac{1-j}{\sqrt{2}}&0&0\\0&0&-1&0\\0&0&0&\frac{-1-j}{\sqrt{2}}
+\end{bmatrix}\begin{bmatrix}
+1&1&0&1\\0&-j&1&j\\1&-1&0&j\\0&j&1&-j
+\end{bmatrix}\\
+=\begin{bmatrix}
+1&1&0&1\\0&\frac{-1-j}{\sqrt{2}}&\frac{1-j}{\sqrt{2}}&\frac{1+j}{\sqrt{2}}\\-1&1&0&-j\\0&\frac{1-j}{\sqrt{2}}&\frac{-1-j}{\sqrt{2}}&\frac{-1+j}{\sqrt{2}}
+\end{bmatrix}
+\end{align}
+Therefore, from $F_8$,
+\begin{align}
+\vec{X}=\begin{bmatrix}
+	 13\\-3.12-6.53j\\j\\1.12-0.53j\\-1\\1.12+0.53j\\-j\\-3.12+6.5355
+	 \end{bmatrix}
+\end{align}
+\end{solution}
 
+\graphicspath{ {./figs/} }
+\includegraphics[scale=0.5]{dft_fft_times.png}
+\item Write a C program to compute the 8-point FFT.
+\begin{solution}
+	\lstinputlisting{./codes/fft.c}
+\end{solution} 
+ \end{enumerate}
+\section{Exercises}
 Answer the following questions by looking at the python code in Problem \ref{prob:output}.
 \begin{enumerate}[label=\thesection.\arabic*]
 \item
@@ -724,7 +1496,6 @@ where the input signal is $x(n)$ and the output signal is $y(n)$ with initial va
 \textbf{signal.filtfilt} with your own routine and verify.
 %
 \item Repeat all the exercises in the previous sections for the above $a$ and $b$.
-
 \item What is the sampling frequency of the input signal?
 \\
 \solution
@@ -739,6 +1510,4 @@ The given butterworth filter is low pass with order=2 and cutoff-frequency=4kHz.
 Modifying the code with different input parameters and to get the best possible output.
 %
 \end{enumerate}
-
 \end{document}
-
