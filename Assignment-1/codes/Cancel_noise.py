@@ -26,8 +26,8 @@ Wn=2*cutoff_freq/sampl_freq
 b, a = signal.butter(order,Wn, 'low') 
 
 #filter the input signal with butterworth filter
-output_signal = signal.filtfilt(b, a, input_signal)
-#output_signal = signal.lfilter(b, a, input_signal)
+#output_signal = signal.filtfilt(b, a, input_signal)
+output_signal = signal.lfilter(b, a, input_signal)
 
 #write the output signal into .wav file
 sf.write('Sound_With_ReducedNoise.wav', output_signal, fs) 
