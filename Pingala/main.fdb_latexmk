@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1665342184 "/home/akhil/Desktop/EE3900-1/Pingala/main.tex" "main.pdf" "main" 1665342185
+["pdflatex"] 1665344831 "/home/akhil/Desktop/EE3900-1/Pingala/main.tex" "main.pdf" "main" 1665344831
   "/etc/texmf/web2c/texmf.cnf" 1660112817 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/akhil/Desktop/EE3900-1/Pingala/main.tex" 1665342184 13953 917c6ade08250960a9717db478f18619 ""
+  "/home/akhil/Desktop/EE3900-1/Pingala/main.tex" 1665344831 13943 1d12c5aebd400d2d0bcbc71eee37d69a ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -134,11 +134,11 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1660117087 4379155 98693266ff65f58d9f98aff394de12d2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1660117099 2800617 0fb16e1163683f93202ad15ed03c35dc ""
   "figs/2_1.png" 1664514681 18282 0e5ff4e6e14ff0a0df8b20caf7d0cd4e ""
-  "figs/2_2.png" 1664514681 15889 81d701b7d71ed112eb33e32cb8b29dde ""
-  "main.aux" 1665342184 2266 81a6e5a8bc6859496eea3b950411f7af "pdflatex"
-  "main.out" 1665342184 377 6ef0fda02ae42ab5eb9699af63378c50 "pdflatex"
-  "main.tex" 1665342184 13953 917c6ade08250960a9717db478f18619 ""
-  "main.toc" 1665342184 214 b7d77648735507f5510b34423b2e2c1f "pdflatex"
+  "figs/2_2.png" 1665344460 15889 81d701b7d71ed112eb33e32cb8b29dde ""
+  "main.aux" 1665344831 2266 81a6e5a8bc6859496eea3b950411f7af "pdflatex"
+  "main.out" 1665344831 377 6ef0fda02ae42ab5eb9699af63378c50 "pdflatex"
+  "main.tex" 1665344831 13943 1d12c5aebd400d2d0bcbc71eee37d69a ""
+  "main.toc" 1665344831 214 b7d77648735507f5510b34423b2e2c1f "pdflatex"
   (generated)
   "main.aux"
   "main.log"
